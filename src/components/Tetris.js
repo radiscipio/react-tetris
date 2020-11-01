@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { createStage } from '../gameHelpers'
 
-//Stlyed Components
+//Styled Components
 import { StyledTetrisWrapper, StyledTetris } from "./styles/StyledTetris"
 
 // Hooks
@@ -14,6 +14,7 @@ import Display from "./Display"
 import StartButton from "./StartButton"
 
 const Tetris = () => {
+  
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
 
@@ -27,7 +28,6 @@ const Tetris = () => {
   }
 
   const startGame = () => {
-// Reset Everything
     setStage(createStage());
     resetPlayer();
 
@@ -70,7 +70,7 @@ const Tetris = () => {
               <Display text="Level" />
             </div>
           )}
-          <StartButton onClick={startGame} />
+          <StartButton callback={startGame} />
         </aside>
       </StyledTetris>
     </StyledTetrisWrapper>
