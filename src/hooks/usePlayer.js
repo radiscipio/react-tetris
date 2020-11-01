@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { randomTetromino } from '../tetrominos'
+import { randomTetrominos } from '../tetrominos'
 
 export const usePlayer = () => {
   const [player, setPlayer] = useState({
     pos: { x: 0, y: 0 },
-    tetromino: randomTetromino().shape,
-    colided: false;
+    tetromino: randomTetrominos().shape,
+    colided: false
   });
   return [player]; 
 }

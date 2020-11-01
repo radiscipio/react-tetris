@@ -4,5 +4,5 @@ import { createStage } from '../gameHelpers'
 export const useStage = () => {
   const [stage, useStage] = useState(createStage())
 
-  return [stage, setStage]
+  return [stage, useStage]
 }
