@@ -17,8 +17,8 @@ const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
 
-  const [player] = usePlayer();
-  const [stage, setStage] = useStage(player);
+  const [player, updatePlayerPos, resetPlayer] = usePlayer();
+  const [stage, setStage] = useStage(player, resetPlayer);
 
   console.log('re-render')
 
@@ -34,7 +34,7 @@ const Tetris = () => {
   }
 
   const drop = () => {
-    updatePlayerPos({ x: 0, y: 1, colided: false })
+    updatePlayerPos({ x: 0, y: 1, collided: false })
 
   }
 
