@@ -18,14 +18,13 @@ export const checkCollision = (player, stage, {x: moveX, y: moveY}) => {
           // Don't go through bottom of game area
           !stage[y + player.pos.y + moveY] || 
           // 3. Check that our move is inside the game area width (x)
-          !stage[y + player.pos.y + moveY][x + player.pos.x + moveX]
+          !stage[y + player.pos.y + moveY][x + player.pos.x + moveX] ||
           // 4. Check that cell we're moving to isn't set to clear
-
+          stage[y + player.pos.y + moveY][x + player.pos.x + moveX][1] !== 'clear'
         ) {
           return true;
         }
       }
-
     }
   }
 }
