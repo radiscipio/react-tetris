@@ -1,5 +1,5 @@
 import React from "react"
-import { createStage } from "../gameHelper"
+import { createStage } from "../gameHelpers"
 // Components 
 import Stage from "./Stage"
 import Display from "./Display"
