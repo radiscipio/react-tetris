@@ -39,11 +39,21 @@ const Tetris = () => {
   }
 
   const move = ({ keycode }) => {
-
+    if (!gameOver) {
+      if(keycode === 37) {
+        movePlayer(-1);
+      }
+      else if(keycode === 39) {
+        movePlayer(1);
+      }
+      else if (keycode === 40) {
+        dropPlayer();
+      }
+    }
   }
 
   return (
-    <StyledTetrisWrapper>
+    <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)}>
       <StyledTetris>
         <Stage stage={stage} />
         <aside>
