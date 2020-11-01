@@ -1,7 +1,7 @@
 import React from "react"
 
-const cell = ({ type }) => (
-<div>cell</div>
+const Cell = ({ type }) => (
+<div>Cell</div>
 )
 
-export default cell
+export default Cell
