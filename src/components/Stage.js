@@ -1,4 +1,7 @@
 import React from "react"
+import { StyledStage } from './styles/StyledStage'
+
+// Components
 import Cell from "./Cell"
 
 const Stage = ({ stage }) => (
