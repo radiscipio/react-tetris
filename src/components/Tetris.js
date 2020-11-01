@@ -14,7 +14,7 @@ import Display from "./Display"
 import StartButton from "./StartButton"
 
 const Tetris = () => {
-  
+
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
 
@@ -23,7 +23,7 @@ const Tetris = () => {
 
   console.log('re-render')
 
-  const movePlayer = (dir) => {
+  const movePlayer = dir => {
     updatePlayerPos({ x: dir, y: 0 });
   }
 
@@ -42,15 +42,15 @@ const Tetris = () => {
     drop();
   }
 
-  const move = ({ keycode }) => {
+  const move = ({ keyCode }) => {
     if (!gameOver) {
-      if(keycode === 37) {
+      if(keyCode === 37) {
         movePlayer(-1);
       }
-      else if(keycode === 39) {
+      else if(keyCode === 39) {
         movePlayer(1)
       }
-      else if (keycode === 40) {
+      else if (keyCode === 40) {
         dropPlayer();
       }
     }
