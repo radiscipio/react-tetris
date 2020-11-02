@@ -23,9 +23,7 @@ const Tetris = () => {
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
   const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(rowsCleared);
-
-  console.log('re-render')
-
+  
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
       updatePlayerPos({ x: dir, y: 0 });
@@ -35,8 +33,8 @@ const Tetris = () => {
   const startGame = () => {
     setStage(createStage());
     setDropTime(1000)
-    resetPlayer();
     setGameOver(false);
+    resetPlayer();
     setScore(0);
     setRows(0);
     setLevel(0);
@@ -107,7 +105,7 @@ const Tetris = () => {
           ) : (
               <div>
                 <Display text={`Score: ${score}`} />
-                <Display text={`Rows: ${rows}`} />
+                <Display text={`rows: ${rows}`} />
                 <Display text={`Level: ${level}`} />
               </div>
             )}
