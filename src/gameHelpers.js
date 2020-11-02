@@ -2,10 +2,7 @@ export const STAGE_WIDTH = 12
 export const STAGE_HEIGHT = 20
 
 export const createStage = () =>
-  Array.from(Array(STAGE_HEIGHT), () => 
-    new Array(STAGE_WIDTH).fill([0, 'clear']) 
-    )
-
+  Array.from(Array(STAGE_HEIGHT), () => Array(STAGE_WIDTH).fill([0, 'clear']));
 
 export const checkCollision = (player, stage, { x: moveX, y: moveY }) => {
 
@@ -16,12 +13,13 @@ export const checkCollision = (player, stage, { x: moveX, y: moveY }) => {
         if (
           // 2. Check that move is inside the game area height (y)
           // Don't go through bottom of game area
-          !stage[y + player.pos.y + moveY] || 
+          !stage[y + player.pos.y + moveY] ||
           // 3. Check that our move is inside the game area width (x)
           !stage[y + player.pos.y + moveY][x + player.pos.x + moveX] ||
           // 4. Check that cell we're moving to isn't set to clear
-          stage[y + player.pos.y + moveY][x + player.pos.x + moveX][1] !== 'clear'
-        ) {
+          stage[y + player.pos.y + moveY][x + player.pos.x + moveX][1] !==
+            'clear'
+      ) {
           return true;
         }
       }

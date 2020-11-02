@@ -11,8 +11,7 @@ export const usePlayer = () => {
 
   const rotate = (matrix, dir) => {
     // Make rows become collumns (transpose)
-
-    const rotatedTetro = matrix.map((_, index) => 
+    const rotatedTetro = matrix.map((_, index) =>
       matrix.map(col => col[index]),
     );
 
@@ -21,41 +20,39 @@ export const usePlayer = () => {
     return rotatedTetro.reverse()
   };
 
-const playerRotate = (stage, dir) => {
-  const clonedPlayer = JSON.parse(JSON.stringify(player));
+  const playerRotate = (stage, dir) => {
+    const clonedPlayer = JSON.parse(JSON.stringify(player));
+    clonedPlayer.tetromino = rotate(clonedPlayer.tetromino, dir);
 
-  clonedPlayer.tetromino = rotate(clonedPlayer.tetromino, dir);
-
-  const pos = player.pos.x;
-  let offset = 1;
-  while(checkCollision(clonedPlayer, stage, { x: 0, y: 0 })) {
-    clonedPlayer.pos.x += offset;
-    offset = -(offset + (offset > 0 ? 1 : -1));
-    if(offset > clonedPlayer.tetromino[0].length) {
-      rotate(clonedPlayer.tetromino, -dir);
-      clonedPlayer.pos.x = pos;
-      return;
+    const pos = clonedPlayer.pos.x;
+    let offset = 1;
+    while (checkCollision(clonedPlayer, stage, { x: 0, y: 0 })) {
+      clonedPlayer.pos.x += offset;
+      offset = -(offset + (offset > 0 ? 1 : -1));
+      if (offset > clonedPlayer.tetromino[0].length) {
+        rotate(clonedPlayer.tetromino, -dir);
+        clonedPlayer.pos.x = pos;
+        return;
+      }
     }
+    setPlayer(clonedPlayer);
   }
 
-  setPlayer(clonedPlayer);
-};
+  const updatePlayerPos = ({ x, y, collided }) => {
+    setPlayer(prev => ({
+      ...prev,
+      pos: { x: (prev.pos.x += x), y: (prev.pos.y += y) },
+      collided,
+    }))
+  };
 
-const updatePlayerPos = ({ x, y, collided }) => {
-  setPlayer(prev => ({
-    ...prev,
-    pos: { x: (prev.pos.x += x), y: (prev.pos.y += y) },
-    collided,
-  }))
-};
+  const resetPlayer = useCallback(() => {
+    setPlayer({
+      pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
+      tetromino: randomTetrominos().shape,
+      collided: false,
+    });
+  }, []);
 
-const resetPlayer = useCallback(() => {
-  setPlayer({
-    pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
-    tetromino: randomTetrominos().shape,
-    collided: false,
-  });
-}, [],);
-
-return [player, updatePlayerPos, resetPlayer, playerRotate];
+  return [player, updatePlayerPos, resetPlayer, playerRotate];
 };
